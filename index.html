@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tipos de Almacenamiento de Datos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+  <!-- Encabezado -->
+  <header class="bg-blue-600 text-white p-6 shadow-md">
+    <h1 class="text-3xl font-bold">Tipos de Almacenamiento de Datos</h1>
+    <p class="mt-2">Explora diferentes formas de guardar y gestionar información</p>
+  </header>
+
+  <main class="max-w-5xl mx-auto p-6 space-y-12">
+    <!-- Filtro -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-4">🔍 Filtro de tipos</h2>
+      <select id="filter" class="border rounded p-2">
+        <option value="all">Todos</option>
+        <option value="fisico">Físico</option>
+        <option value="nube">En la nube</option>
+        <option value="memoria">En memoria</option>
+        <option value="distribuido">Distribuido</option>
+      </select>
+    </section>
+
+    <!-- Tarjetas -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-6">📦 Tipos principales</h2>
+      <div id="cards" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="card bg-white p-4 rounded-xl shadow" data-category="fisico">
+          <h3 class="text-lg font-bold">Almacenamiento en disco</h3>
+          <p>Discos duros, SSD y otros medios físicos.</p>
+        </div>
+        <div class="card bg-white p-4 rounded-xl shadow" data-category="nube">
+          <h3 class="text-lg font-bold">Almacenamiento en la nube</h3>
+          <p>Servicios como Google Drive, AWS S3, OneDrive.</p>
+        </div>
+        <div class="card bg-white p-4 rounded-xl shadow" data-category="memoria">
+          <h3 class="text-lg font-bold">En memoria</h3>
+          <p>Datos guardados temporalmente en RAM o cachés.</p>
+        </div>
+        <div class="card bg-white p-4 rounded-xl shadow" data-category="distribuido">
+          <h3 class="text-lg font-bold">Almacenamiento distribuido</h3>
+          <p>Datos fragmentados en múltiples servidores o nodos.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tabla comparativa -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-4">📊 Tabla comparativa</h2>
+      <div class="overflow-x-auto">
+        <table class="table-auto w-full border-collapse border border-gray-300 text-sm">
+          <thead class="bg-blue-100">
+            <tr>
+              <th class="border p-2">Tipo</th>
+              <th class="border p-2">Ventajas</th>
+              <th class="border p-2">Desventajas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border p-2">Disco</td>
+              <td class="border p-2">Bajo coste, amplia disponibilidad</td>
+              <td class="border p-2">Menor velocidad</td>
+            </tr>
+            <tr>
+              <td class="border p-2">Nube</td>
+              <td class="border p-2">Acceso global, escalabilidad</td>
+              <td class="border p-2">Dependencia de internet</td>
+            </tr>
+            <tr>
+              <td class="border p-2">Memoria</td>
+              <td class="border p-2">Altísima velocidad</td>
+              <td class="border p-2">Volatilidad, coste alto</td>
+            </tr>
+            <tr>
+              <td class="border p-2">Distribuido</td>
+              <td class="border p-2">Tolerancia a fallos, escalable</td>
+              <td class="border p-2">Complejidad de gestión</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Glosario -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-4">📖 Glosario</h2>
+      <ul class="list-disc pl-6 space-y-2">
+        <li><strong>SSD:</strong> Unidad de estado sólido, más rápida que HDD.</li>
+        <li><strong>Latency:</strong> Tiempo de respuesta en acceder a datos.</li>
+        <li><strong>Replica:</strong> Copia de datos para redundancia.</li>
+        <li><strong>Cache:</strong> Almacenamiento temporal de datos de acceso frecuente.</li>
+      </ul>
+    </section>
+
+    <!-- Quiz -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-4">📝 Quiz interactivo</h2>
+      <div class="bg-white p-4 rounded-xl shadow space-y-4">
+        <p><strong>Pregunta:</strong> ¿Cuál es la principal desventaja del almacenamiento en la nube?</p>
+        <div class="space-y-2">
+          <button onclick="checkAnswer('a')" class="block w-full border rounded p-2 hover:bg-gray-100">a) Coste elevado de hardware</button>
+          <button onclick="checkAnswer('b')" class="block w-full border rounded p-2 hover:bg-gray-100">b) Dependencia de internet</button>
+          <button onclick="checkAnswer('c')" class="block w-full border rounded p-2 hover:bg-gray-100">c) Baja velocidad de RAM</button>
+        </div>
+        <p id="feedback" class="font-medium"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="text-center p-6 text-gray-500">
+    © 2025 - Proyecto educativo de almacenamiento de datos
+  </footer>
+
+  <script>
+    // Filtro
+    const filter = document.getElementById("filter");
+    const cards = document.querySelectorAll(".card");
+    filter.addEventListener("change", () => {
+      const value = filter.value;
+      cards.forEach(card => {
+        if (value === "all" || card.dataset.category === value) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    });
+
+    // Quiz
+    function checkAnswer(option) {
+      const feedback = document.getElementById("feedback");
+      if (option === "b") {
+        feedback.textContent = "✅ Correcto: la dependencia de internet es una limitación.";
+        feedback.className = "text-green-600 font-semibold";
+      } else {
+        feedback.textContent = "❌ Incorrecto. Intenta de nuevo.";
+        feedback.className = "text-red-600 font-semibold";
+      }
+    }
+  </script>
+</body>
+</html>
